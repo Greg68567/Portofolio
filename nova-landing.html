@@ -104,35 +104,34 @@
       to { transform: rotate(360deg); }
     }
 
-    /* HERO SECTION */
+    /* HERO SECTION - MODIFIÉ SANS IMAGE */
     .hero {
       height: 100vh;
       min-height: 800px;
       display: flex;
       align-items: center;
+      justify-content: center;
       position: relative;
       background: linear-gradient(135deg, var(--quantum-blue), var(--void-black));
       overflow: hidden;
+      text-align: center;
+      padding: 0 20px;
     }
 
     .hero-container {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
+      max-width: 1200px;
       width: 100%;
-      max-width: 1400px;
-      margin: 0 auto;
-      padding: 0 8%;
+      padding: 0 5%;
     }
 
     .hero-text {
-      width: 50%;
+      width: 100%;
       position: relative;
       z-index: 2;
     }
 
     .hero-title {
-      font-size: 3.5rem;
+      font-size: 4.5rem;
       line-height: 1.1;
       margin-bottom: 30px;
       background: linear-gradient(135deg, var(--matrix-green), var(--neon-cyan));
@@ -146,61 +145,31 @@
       display: block;
     }
 
-    .hero-title-line:first-child {
-      margin-left: 30px;
-    }
-
-    .hero-title-line:last-child {
-      margin-left: 60px;
-    }
-
     .hero-subtitle {
-      font-size: 1.2rem;
+      font-size: 1.5rem;
       margin-bottom: 40px;
-      margin-left: 90px;
       color: var(--future-silver);
       line-height: 1.8;
-    }
-
-    .hero-image {
-      width: 45%;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      position: relative;
-      z-index: 1;
-    }
-
-    .can-image {
-      height: 60vh;
-      width: auto;
-      max-width: 100%;
-      object-fit: contain;
-      filter: drop-shadow(0 0 30px rgba(0, 247, 255, 0.4));
-      animation: float 6s ease-in-out infinite;
-    }
-
-    @keyframes float {
-      0%, 100% { transform: translateY(0) rotate(1deg); }
-      50% { transform: translateY(-20px) rotate(-1deg); }
+      max-width: 800px;
+      margin-left: auto;
+      margin-right: auto;
     }
 
     .btn {
       display: inline-block;
       background: transparent;
       color: var(--matrix-green);
-      padding: 14px 36px;
+      padding: 16px 40px;
       border-radius: 4px;
       text-decoration: none;
       font-weight: 600;
-      font-size: 1rem;
+      font-size: 1.1rem;
       text-transform: uppercase;
       letter-spacing: 1.5px;
       transition: all 0.4s;
       border: 1.5px solid var(--matrix-green);
       position: relative;
       overflow: hidden;
-      margin-left: 90px;
     }
 
     .btn::before {
@@ -223,7 +192,7 @@
       width: 100%;
     }
 
-    /* FEATURES SECTION */
+    /* AUTRES SECTIONS (inchangées) */
     .features {
       background-color: var(--quantum-blue);
       text-align: center;
@@ -322,7 +291,6 @@
       font-size: 1.05rem;
     }
 
-    /* TESTIMONIALS SECTION */
     .testimonials {
       background: linear-gradient(135deg, var(--energy-purple), var(--quantum-blue));
       text-align: center;
@@ -419,7 +387,6 @@
       margin: 0;
     }
 
-    /* CTA SECTION - ALIGNÉ COMME SUR L'IMAGE */
     .cta {
       min-height: 100vh;
       display: flex;
@@ -485,7 +452,6 @@
       color: var(--quantum-blue);
     }
 
-    /* FOOTER - ALIGNÉ COMME SUR L'IMAGE */
     footer {
       background-color: var(--void-black);
       padding: 80px 20px;
@@ -596,7 +562,6 @@
       text-decoration: underline;
     }
 
-    /* ANIMATIONS */
     @keyframes fadeInUp {
       from {
         opacity: 0;
@@ -613,41 +578,24 @@
       animation: fadeInUp 0.8s forwards;
     }
 
-    /* RESPONSIVE */
     @media (max-width: 1200px) {
       .hero-title {
-        font-size: 3rem;
+        font-size: 3.5rem;
       }
     }
 
     @media (max-width: 992px) {
       .hero {
         height: auto;
-        padding: 120px 0 80px;
+        padding: 150px 0 100px;
       }
       
-      .hero-container {
-        flex-direction: column;
-        text-align: center;
+      .hero-title {
+        font-size: 3rem;
       }
       
-      .hero-text,
-      .hero-image {
-        width: 100%;
-      }
-      
-      .hero-title-line,
-      .hero-subtitle,
-      .btn {
-        margin-left: 0 !important;
-      }
-      
-      .hero-image {
-        margin-top: 60px;
-      }
-      
-      .can-image {
-        max-height: 50vh;
+      .hero-subtitle {
+        font-size: 1.3rem;
       }
       
       .features h2,
@@ -664,10 +612,6 @@
     }
 
     @media (max-width: 768px) {
-      section {
-        padding: 80px 20px;
-      }
-      
       .hero-title {
         font-size: 2.5rem;
       }
@@ -677,7 +621,7 @@
       }
       
       .btn {
-        padding: 12px 30px;
+        padding: 14px 32px;
       }
 
       .cta h2 {
@@ -703,7 +647,7 @@
 
     @media (max-width: 576px) {
       .hero-title {
-        font-size: 2rem;
+        font-size: 2.2rem;
       }
       
       .cta h2 {
@@ -711,7 +655,7 @@
       }
 
       .btn-large {
-        padding: 15px 40px;
+        padding: 16px 40px;
         font-size: 1rem;
       }
     }
@@ -723,7 +667,7 @@
     <i class="fas fa-home"></i>
   </a>
 
-  <!-- Hero Section -->
+  <!-- Hero Section - Modifié sans image -->
   <section class="hero">
     <div class="hero-container">
       <div class="hero-text">
@@ -732,12 +676,13 @@
           <span class="hero-title-line">QUANTUM ENERGY</span>
         </h1>
         <p class="hero-subtitle">
-          Quantum Surge - The revolutionary energy drink<br>
+          Quantum Surge - The revolutionary energy experience<br>
           designed for those who push the boundaries<br>
-          of performance
+          of human performance
         </p>
         <a href="#order" class="btn">DISCOVER QUANTUM</a>
       </div>
+    </div>
   </section>
 
   <!-- Features Section -->
@@ -812,7 +757,7 @@
     </div>
   </section>
 
-  <!-- CTA Section - Aligné comme sur l'image -->
+  <!-- CTA Section -->
   <section class="cta" id="order">
     <div class="cta-content">
       <h2>READY FOR THE<br>ENERGY OF THE<br>FUTURE?</h2>
@@ -821,7 +766,7 @@
     </div>
   </section>
 
-  <!-- Footer - Aligné comme sur l'image -->
+  <!-- Footer -->
   <footer>
     <div class="footer-content">
       <div class="footer-about">
@@ -869,13 +814,8 @@
       });
       
       animateElements.forEach(el => {
-        if (el.classList.contains('can-image')) {
-          el.style.animationDelay = '0.4s';
-        } else {
-          const delay = (Math.random() * 0.5).toFixed(1);
-          el.style.animationDelay = `${delay}s`;
-        }
-        
+        const delay = (Math.random() * 0.5).toFixed(1);
+        el.style.animationDelay = `${delay}s`;
         observer.observe(el);
         el.style.animationPlayState = 'paused';
       });

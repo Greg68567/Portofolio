@@ -1,0 +1,513 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Luminara Bistro | Modern Restaurant</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --lum-bg: #181c1f;
+            --lum-primary: #ffb347;
+            --lum-secondary: #ff6f61;
+            --lum-accent: #2ec4b6;
+            --lum-white: #f8f8f8;
+            --lum-dark: #23272a;
+            --lum-gray: #bfc9d1;
+        }
+        html, body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Montserrat', Arial, sans-serif;
+            background: linear-gradient(120deg, var(--lum-bg) 60%, #23272a 100%);
+            color: var(--lum-white);
+            min-height: 100vh;
+        }
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(120deg, #23272a 60%, var(--lum-bg) 100%);
+            position: relative;
+            overflow: hidden;
+            transition: background 0.7s;
+        }
+        .hero-bg {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            z-index: 0;
+            pointer-events: none;
+        }
+        .circle {
+            position: absolute;
+            border-radius: 50%;
+            opacity: 0.13;
+            filter: blur(20px);
+            animation: float 12s infinite alternate;
+        }
+        .circle1 { width: 400px; height: 400px; background: var(--lum-primary); left: 5%; top: 10%; animation-delay: 0s;}
+        .circle2 { width: 300px; height: 300px; background: var(--lum-accent); right: 10%; top: 30%; animation-delay: 2s;}
+        .circle3 { width: 200px; height: 200px; background: var(--lum-secondary); left: 40%; bottom: 10%; animation-delay: 4s;}
+        @keyframes float {
+            0% { transform: translateY(0) scale(1);}
+            100% { transform: translateY(-40px) scale(1.1);}
+        }
+        .navbar {
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 2rem 4vw 1.2rem 4vw;
+            position: fixed;
+            top: 0; left: 0;
+            z-index: 100;
+            background: linear-gradient(90deg, #23272aee 80%, #181c1fee 100%);
+            backdrop-filter: blur(6px);
+            box-shadow: 0 2px 18px #181c1f33;
+        }
+        .logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.3rem;
+            font-weight: 700;
+            color: var(--lum-primary);
+            letter-spacing: 2px;
+            text-shadow: 0 2px 18px #ffb34744;
+            transition: transform 0.3s, text-shadow 0.3s;
+            cursor: pointer;
+        }
+        .logo:hover {
+            transform: scale(1.07) rotate(-2deg);
+            text-shadow: 0 0 32px #ffb347cc, 0 2px 18px #ffb34744;
+        }
+        .nav-links a {
+            color: var(--lum-white);
+            text-decoration: none;
+            margin-left: 2.2rem;
+            font-weight: 600;
+            font-size: 1.1rem;
+            position: relative;
+            transition: color 0.3s;
+        }
+        .nav-links a.cta-btn {
+            background: linear-gradient(90deg, var(--lum-primary), var(--lum-secondary));
+            color: #23272a !important;
+            font-weight: 700;
+            font-size: 1.1rem;
+            padding: 0.7rem 2rem;
+            border: none;
+            border-radius: 30px;
+            box-shadow: 0 4px 18px #ffb34755, 0 1.5px 0 #ffb34722;
+            margin-left: 2.5rem;
+            margin-right: 0;
+            display: inline-block;
+            vertical-align: middle;
+            transition: background 0.3s, color 0.3s, transform 0.2s, box-shadow 0.3s;
+            z-index: 20;
+            position: relative;
+            outline: 2px solid #fff2;
+        }
+        .nav-links a.cta-btn:hover {
+            background: linear-gradient(90deg, var(--lum-secondary), var(--lum-primary));
+            color: var(--lum-white) !important;
+            transform: scale(1.07);
+            box-shadow: 0 8px 32px #ffb34777;
+            outline: 2px solid var(--lum-primary);
+        }
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            left: 0; bottom: -6px;
+            width: 0; height: 2px;
+            background: var(--lum-primary);
+            transition: width 0.3s;
+        }
+        .nav-links a:hover {
+            color: var(--lum-primary);
+        }
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+        .hero-content {
+            z-index: 2;
+            text-align: center;
+            margin-top: 8.5rem;
+            animation: fadeInUp 1.2s cubic-bezier(.77,0,.18,1) 0.2s both;
+        }
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(40px);}
+            to { opacity: 1; transform: translateY(0);}
+        }
+        .hero-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 3.2rem;
+            color: var(--lum-primary);
+            margin-bottom: 1.2rem;
+            letter-spacing: 1.5px;
+            text-shadow: 0 2px 18px #ffb34733;
+            opacity: 0;
+            transform: translateY(40px) scale(0.97);
+            animation: fadeInTitle 1.2s cubic-bezier(.77,0,.18,1) 0.4s forwards;
+        }
+        @keyframes fadeInTitle {
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1.03);
+            }
+        }
+        .hero-desc {
+            font-size: 1.25rem;
+            color: var(--lum-gray);
+            margin-bottom: 2.2rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .cta-btn {
+            background: linear-gradient(90deg, var(--lum-primary), var(--lum-secondary));
+            color: #23272a;
+            font-weight: 700;
+            font-size: 1.15rem;
+            padding: 1rem 2.5rem;
+            border: none;
+            border-radius: 30px;
+            box-shadow: 0 4px 24px #ffb34733;
+            cursor: pointer;
+            transition: background 0.3s, color 0.3s, transform 0.2s;
+            letter-spacing: 1px;
+        }
+        .cta-btn:hover {
+            background: linear-gradient(90deg, var(--lum-secondary), var(--lum-primary));
+            color: var(--lum-white);
+            transform: scale(1.06);
+        }
+        .features {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 2.5rem;
+            margin: 5rem auto 0 auto;
+            max-width: 1100px;
+            z-index: 2;
+            position: relative;
+        }
+        .feature-card {
+            background: #23272aee;
+            border-radius: 18px;
+            padding: 2.2rem 2rem 1.7rem 2rem;
+            min-width: 260px;
+            max-width: 320px;
+            flex: 1 1 260px;
+            box-shadow: 0 4px 24px #2ec4b622, 0 1.5px 0 #ffb34711;
+            text-align: center;
+            color: var(--lum-white);
+            border: 2px solid var(--lum-accent);
+            opacity: 0;
+            transform: translateY(40px) scale(0.97);
+            transition: opacity 0.7s, transform 0.7s, box-shadow 0.4s, border-color 0.4s;
+        }
+        .feature-card.visible {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+        }
+        .feature-card:hover {
+            box-shadow: 0 8px 32px #2ec4b6cc, 0 1.5px 0 #ffb34733;
+            border-color: var(--lum-primary);
+            transform: translateY(-8px) scale(1.04);
+        }
+        .feature-icon {
+            font-size: 2.5rem;
+            color: var(--lum-primary);
+            margin-bottom: 1.2rem;
+            filter: drop-shadow(0 0 8px #ffb34788);
+        }
+        .feature-title {
+            font-size: 1.25rem;
+            font-weight: 700;
+            margin-bottom: 0.7rem;
+            color: var(--lum-primary);
+        }
+        .feature-desc {
+            color: var(--lum-gray);
+            font-size: 1.05rem;
+        }
+        .menu-section {
+            margin: 6rem auto 0 auto;
+            max-width: 900px;
+            text-align: center;
+        }
+        .menu-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.2rem;
+            color: var(--lum-accent);
+            margin-bottom: 2.2rem;
+            letter-spacing: 1px;
+        }
+        .menu-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 2rem;
+        }
+        .menu-item {
+            background: #23272aee;
+            border-radius: 16px;
+            padding: 1.5rem 1.2rem;
+            box-shadow: 0 2px 12px #2ec4b622;
+            color: var(--lum-white);
+            border: 2px solid #2ec4b6;
+            transition: transform 0.3s, box-shadow 0.3s, border-color 0.3s;
+        }
+        .menu-item:hover {
+            transform: translateY(-10px) scale(1.05) rotate(-1deg);
+            box-shadow: 0 8px 32px #ffb34777, 0 2px 18px #2ec4b6cc;
+            border-color: var(--lum-primary);
+        }
+        .menu-item-title {
+            font-size: 1.15rem;
+            font-weight: 700;
+            color: var(--lum-primary);
+            margin-bottom: 0.5rem;
+        }
+        .menu-item-desc {
+            color: var(--lum-gray);
+            font-size: 0.98rem;
+            margin-bottom: 0.7rem;
+        }
+        .menu-item-price {
+            color: var(--lum-secondary);
+            font-weight: 700;
+            font-size: 1.1rem;
+        }
+        .reservation-section {
+            margin: 6rem auto 0 auto;
+            max-width: 700px;
+            text-align: center;
+        }
+        .reservation-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+            color: var(--lum-primary);
+            margin-bottom: 1.2rem;
+        }
+        .reservation-form {
+            display: flex;
+            flex-direction: column;
+            gap: 1.2rem;
+            align-items: center;
+        }
+        .reservation-form input, .reservation-form textarea {
+            padding: 0.9rem 1.2rem;
+            border-radius: 8px;
+            border: none;
+            font-size: 1rem;
+            width: 100%;
+            max-width: 400px;
+            background: #23272a;
+            color: var(--lum-white);
+            box-shadow: 0 2px 8px #2ec4b611;
+        }
+        .reservation-form input:focus, .reservation-form textarea:focus {
+            outline: 2px solid var(--lum-accent);
+        }
+        .reservation-form button {
+            background: linear-gradient(90deg, var(--lum-accent), var(--lum-primary));
+            color: #23272a;
+            font-weight: 700;
+            font-size: 1.1rem;
+            padding: 0.9rem 2.2rem;
+            border: none;
+            border-radius: 30px;
+            box-shadow: 0 4px 18px #2ec4b633;
+            cursor: pointer;
+            transition: background 0.3s, color 0.3s, transform 0.2s;
+        }
+        .reservation-form button:hover {
+            background: linear-gradient(90deg, var(--lum-primary), var(--lum-accent));
+            color: var(--lum-white);
+            transform: scale(1.05);
+        }
+        .footer {
+            margin-top: 6rem;
+            padding: 2.5rem 0 1.2rem 0;
+            background: #181c1f;
+            text-align: center;
+            color: var(--lum-gray);
+            font-size: 1.05rem;
+            letter-spacing: 1px;
+        }
+        .footer .social-links {
+            margin-bottom: 1.2rem;
+        }
+        .footer .social-links a {
+            color: var(--lum-accent);
+            margin: 0 1.1rem;
+            font-size: 1.5rem;
+            transition: color 0.3s, transform 0.3s;
+        }
+        .footer .social-links a:hover {
+            color: var(--lum-primary);
+            transform: translateY(-4px) scale(1.15);
+        }
+        @media (max-width: 700px) {
+            .hero-title { font-size: 2.1rem; }
+            .hero-content { margin-top: 4.5rem; }
+            .features { gap: 1.2rem; }
+            .feature-card { min-width: 180px; padding: 1.2rem 0.7rem; }
+            .menu-title { font-size: 1.3rem; }
+            .menu-section { margin-top: 3rem; }
+            .reservation-section { margin-top: 3rem; }
+            .navbar {
+                padding: 1.1rem 2vw 0.7rem 2vw;
+            }
+            .nav-links a.cta-btn {
+                font-size: 0.98rem !important;
+                padding: 0.6rem 1.1rem !important;
+                margin-left: 1.1rem;
+            }
+            .back-btn {
+                top: 0;
+                left: 0;
+                margin-right: 1.1rem;
+                margin-left: 0;
+                padding: 0.5rem 1.1rem;
+                font-size: 0.98rem;
+            }
+        }
+        /* Remplacement du style .back-btn pour l'intégration à gauche */
+        .back-btn {
+            position: relative;
+            top: 0;
+            left: 0;
+            margin-right: 2.5rem;
+            margin-left: 0;
+            background: linear-gradient(90deg, var(--lum-primary), var(--lum-secondary));
+            color: #23272a !important;
+            font-weight: 700;
+            font-size: 1.1rem;
+            padding: 0.7rem 2rem;
+            border: none;
+            border-radius: 30px;
+            box-shadow: 0 4px 24px #ffb34799, 0 1.5px 0 #ffb34722;
+            z-index: 120;
+            border: 2px solid #fff2;
+            transition: background 0.3s, color 0.3s, transform 0.2s, box-shadow 0.3s, opacity 0.7s, filter 0.7s;
+            opacity: 0;
+            filter: blur(8px) translateY(-20px);
+            animation: btnFadeIn 1.2s 0.3s cubic-bezier(.77,0,.18,1) forwards;
+        }
+        @keyframes btnFadeIn {
+            to {
+                opacity: 1;
+                filter: blur(0) translateY(0);
+            }
+        }
+        .back-btn:hover {
+            background: linear-gradient(90deg, var(--lum-secondary), var(--lum-primary));
+            color: var(--lum-white) !important;
+            transform: scale(1.07);
+            box-shadow: 0 8px 32px #ffb347cc;
+            border: 2px solid var(--lum-primary);
+        }
+    </style>
+</head>
+<body>
+    <div class="hero">
+        <div class="hero-bg">
+            <div class="circle circle1"></div>
+            <div class="circle circle2"></div>
+            <div class="circle circle3"></div>
+        </div>
+        <nav class="navbar">
+            <a href="index.html#landing-pages" class="cta-btn back-btn">Home</a>
+            <div class="logo">Luminara Bistro</div>
+            <div class="nav-links">
+                <a href="#menu">Menu</a>
+                <a href="#reservation">Reservation</a>
+                <a href="#contact">Contact</a>
+            </div>
+        </nav>
+        <div class="hero-content">
+            <h1 class="hero-title">A Modern Culinary Experience</h1>
+            <p class="hero-desc">Discover a fusion of tradition and innovation in a warm, luminous atmosphere. Fresh ingredients, creative plates, and a passion for hospitality await you at Luminara Bistro.</p>
+            <a href="#reservation" class="cta-btn">Book a Table</a>
+        </div>
+    </div>
+    <section class="features">
+        <div class="feature-card"><div class="feature-icon"><i class="fas fa-seedling"></i></div><div class="feature-title">Fresh & Local</div><div class="feature-desc">Seasonal ingredients sourced from local farms for peak flavor and sustainability.</div></div>
+        <div class="feature-card"><div class="feature-icon"><i class="fas fa-wine-glass-alt"></i></div><div class="feature-title">Curated Wines</div><div class="feature-desc">A handpicked wine list to perfectly complement every dish and occasion.</div></div>
+        <div class="feature-card"><div class="feature-icon"><i class="fas fa-star"></i></div><div class="feature-title">Chef's Specials</div><div class="feature-desc">Weekly signature creations from our award-winning chef.</div></div>
+        <div class="feature-card"><div class="feature-icon"><i class="fas fa-leaf"></i></div><div class="feature-title">Vegetarian Friendly</div><div class="feature-desc">Delicious options for every preference, including vegan and gluten-free plates.</div></div>
+    </section>
+    <section class="menu-section" id="menu">
+        <div class="menu-title">Our Signature Menu</div>
+        <div class="menu-grid">
+            <div class="menu-item"><div class="menu-item-title">Truffle Risotto</div><div class="menu-item-desc">Creamy Arborio rice, wild mushrooms, black truffle oil</div><div class="menu-item-price">€18</div></div>
+            <div class="menu-item"><div class="menu-item-title">Seared Salmon</div><div class="menu-item-desc">Atlantic salmon, citrus beurre blanc, seasonal vegetables</div><div class="menu-item-price">€22</div></div>
+            <div class="menu-item"><div class="menu-item-title">Luminara Burger</div><div class="menu-item-desc">Brioche bun, aged cheddar, caramelized onions, house sauce</div><div class="menu-item-price">€16</div></div>
+            <div class="menu-item"><div class="menu-item-title">Vegan Buddha Bowl</div><div class="menu-item-desc">Quinoa, roasted chickpeas, avocado, tahini dressing</div><div class="menu-item-price">€15</div></div>
+            <div class="menu-item"><div class="menu-item-title">Chocolate Lava Cake</div><div class="menu-item-desc">Molten chocolate center, vanilla ice cream</div><div class="menu-item-price">€8</div></div>
+            <div class="menu-item"><div class="menu-item-title">Artisan Cheese Plate</div><div class="menu-item-desc">Selection of local cheeses, honey, nuts, fruit</div><div class="menu-item-price">€12</div></div>
+        </div>
+    </section>
+    <section class="reservation-section" id="reservation">
+        <div class="reservation-title">Book Your Table</div>
+        <form class="reservation-form">
+            <input type="text" placeholder="Your Name" required>
+            <input type="email" placeholder="Email Address" required>
+            <input type="date" required>
+            <input type="time" required>
+            <textarea placeholder="Special requests (optional)" rows="3"></textarea>
+            <button type="submit">Reserve Now</button>
+        </form>
+    </section>
+    <footer class="footer" id="contact">
+        <div class="social-links">
+            <a href="#"><i class="fab fa-instagram"></i></a>
+            <a href="#"><i class="fab fa-facebook"></i></a>
+            <a href="#"><i class="fab fa-tripadvisor"></i></a>
+        </div>
+        <div>Luminara Bistro &copy; 2025. All rights reserved.</div>
+    </footer>
+    <script>
+        // Animate feature cards on scroll
+        document.addEventListener('DOMContentLoaded', () => {
+            const cards = document.querySelectorAll('.feature-card');
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                    }
+                });
+            }, { threshold: 0.15 });
+            cards.forEach(card => observer.observe(card));
+
+            // Animate hero background on scroll
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 40) {
+                    document.body.classList.add('scrolled');
+                } else {
+                    document.body.classList.remove('scrolled');
+                }
+            });
+        });
+        // Smooth scroll for nav links
+        document.querySelectorAll('.nav-links a[href^="#"]').forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    window.scrollTo({ top: target.offsetTop - 60, behavior: 'smooth' });
+                }
+            });
+        });
+        // Fake reservation form submit
+        document.querySelector('.reservation-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('Thank you for your reservation! We look forward to welcoming you at Luminara Bistro.');
+            this.reset();
+        });
+    </script>
+</body>
+</html>

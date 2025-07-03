@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>David | Freelance Designer</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+    <header>
+        <h1 class="hover-glow">
+            David <span class="freelancer">Freelancer</span>
+        </h1>
+    </header>
+
+    <nav>
+        <a href="#" class="btn-modern" data-section="about">About</a>
+        <a href="#" class="btn-modern" data-section="projects">Projects</a>
+        <a href="#" class="btn-modern" data-section="contact">Contact</a>
+    </nav>
+
+    <main>
+        <section id="about" class="content-section active">
+            <h2 class="hover-glow">About Me</h2>
+            <div class="about-content">
+                <p class="about-text">
+                    Passionate about visual storytelling and conversion-focused design, I'm <strong>David</strong>, a freelance designer specializing in:
+                </p>
+                <ul class="specialties-list">
+                    <li>
+                        <span class="specialty-btn">Modern Logo Design</span>: 
+                        <span class="specialty-description">Crafting unique, memorable brand identities that stand out.</span>
+                    </li>
+                    <li>
+                        <span class="specialty-btn">High-Converting Landing Pages</span>: 
+                        <span class="specialty-description">Designing sleek, user-friendly interfaces that drive results.</span>
+                    </li>
+                </ul>
+                <p class="about-text">
+                    I blend <span class="highlight">aesthetic appeal</span> with <span class="highlight">strategic thinking</span> to create designs that not only look great but perform even better.
+                </p>
+                <p class="availability">
+                    Available for collaborations and ambitious projects. <span class="highlight">✨</span>
+                </p>
+            </div>
+        </section>
+
+        <section id="projects" class="content-section">
+            <h2 class="hover-glow">Recent Projects</h2>
+            <div class="project-tabs">
+                <button class="project-tab active" data-project-type="logos">Logos</button>
+                <button class="project-tab" data-project-type="landing-pages">Landing Pages</button>
+            </div>
+
+            <div id="logos" class="project-type active">
+                <div class="projects-grid">
+                    <div class="project">
+                        <img src="images/project1.jpg" alt="Logo Project 1" />
+                    </div>
+                    <div class="project">
+                        <img src="images/project2.jpg" alt="Logo Project 2" />
+                    </div>
+                    <div class="project">
+                        <img src="images/project3.jpg" alt="Logo Project 3" />
+                    </div>
+                    <div class="project">
+                        <img src="images/project4.png" alt="Logo Project 4" />
+                    </div>
+                    <div class="project">
+                        <img src="images/project5.png" alt="Logo Project 5" />
+                    </div>
+                    <div class="project">
+                        <img src="images/project6.png" alt="Logo Project 6" />
+                    </div>
+                    <div class="project">
+                        <img src="images/project7.png" alt="Logo Project 7" />
+                    </div>
+                </div>
+            </div>
+
+            <div id="landing-pages" class="project-type">
+                <!-- <h3 class="landing-pages-title"><i class="fa fa-rocket"></i> Landing Pages</h3> -->
+                <div class="landing-pages-grid">
+                    <a href="nova-landing.html" class="project-link">
+                        <div class="project landing-project">
+                            <img src="images/quantumsurge.png" alt="Quantum Surge Landing Page" />
+                            <div class="project-overlay">
+                                <h3>Quantum Surge</h3>
+                                <p>Modern SaaS landing page</p>
+                            </div>
+                        </div>
+                    </a>
+                    <a href="shadow-vpn.html" class="project-link">
+                        <div class="project landing-project">
+                            <img src="images/Shadowvpn.png" alt="Shadow VPN Landing Page" />
+                            <div class="project-overlay">
+                                <h3>Shadow VPN</h3>
+                                <p>Animated VPN landing page</p>
+                            </div>
+                        </div>
+                    </a>
+                    <a href="restaurant.html" class="project-link">
+                        <div class="project landing-project">
+                            <img src="images/luminara.png" alt="Luminara Bistro Landing Page" />
+                            <div class="project-overlay">
+                                <h3>Luminara Bistro</h3>
+                                <p>Restaurant landing page</p>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+    <style>
+    /* Embellished Landing Pages Box */
+    .landing-pages-box {
+        background: linear-gradient(120deg, #f5f7fa 0%, #c3cfe2 100%);
+        border-radius: 22px;
+        box-shadow: 0 8px 32px #6e44ff22, 0 1.5px 0 #6e44ff11;
+        padding: 2.2rem 2rem 2.5rem 2rem;
+        margin: 2.5rem 0 0 0;
+        position: relative;
+        overflow: hidden;
+        animation: fadeInUp 1.1s cubic-bezier(.77,0,.18,1);
+    }
+    .landing-pages-title {
+        font-family: 'Poppins', 'Segoe UI', sans-serif;
+        font-size: 2rem;
+        font-weight: 700;
+        color: #6e44ff;
+        margin-bottom: 1.7rem;
+        display: flex;
+        align-items: center;
+        gap: 0.7em;
+        letter-spacing: 1px;
+        text-shadow: 0 2px 12px #6e44ff22;
+    }
+    .landing-pages-title i {
+        color: #00f7ff;
+        font-size: 1.3em;
+        filter: drop-shadow(0 0 8px #00f7ff88);
+    }
+    .landing-pages-grid {
+        display: flex;
+        gap: 2.2rem;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-items: stretch;
+        overflow-x: auto;
+        padding-bottom: 0.5rem;
+        scrollbar-width: thin;
+        scrollbar-color: #00f7ff #232b3e;
+        margin: 0 auto;
+        max-width: 100vw;
+    }
+    .landing-project {
+        border-radius: 26px;
+        overflow: hidden;
+        box-shadow: 0 8px 32px #0a0e1744, 0 1.5px 0 #00f7ff22;
+        background: linear-gradient(120deg, #101624 60%, #1a2336 100%);
+        border: 6px solid #11151c;
+        transition: transform 0.32s cubic-bezier(.77,0,.18,1), box-shadow 0.32s cubic-bezier(.77,0,.18,1), border-color 0.32s;
+        min-width: 270px;
+        max-width: 320px;
+        flex: 1 1 270px;
+        position: relative;
+        cursor: pointer;
+        filter: drop-shadow(0 2px 18px #00f7ff22);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: flex-start;
+        background-color: #181c24;
+    }
+    .landing-project img {
+        width: 100%;
+        height: 220px;
+        object-fit: cover;
+        display: block;
+        border-bottom: 2px solid #232b3e;
+        filter: grayscale(0.08) brightness(0.98) contrast(1.08);
+        transition: filter 0.3s;
+        background: #232b3e;
+    }
+    .landing-project img:not([src]),
+    .landing-project img[src=""],
+    .landing-project img.broken-img {
+        background: #232b3e url('data:image/svg+xml;utf8,<svg width="60" height="60" xmlns="http://www.w3.org/2000/svg"><rect width="100%" height="100%" fill="%23232b3e"/><text x="50%" y="50%" font-size="18" fill="%236e44ff" text-anchor="middle" alignment-baseline="middle">?</text></svg>') center center no-repeat;
+        object-fit: contain;
+    }
+    .landing-project .project-overlay {
+        background: linear-gradient(90deg, #101624ee 0%, #1a2336cc 100%);
+        padding: 1.1rem 1rem 0.7rem 1rem;
+        text-align: left;
+        border-bottom-left-radius: 18px;
+        border-bottom-right-radius: 18px;
+        box-shadow: 0 2px 12px #0a0e1711;
+        flex: 1 1 auto;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+    .landing-project h3 {
+        font-size: 1.22rem;
+        color: #00f7ff;
+        margin: 0 0 0.3em 0;
+        font-weight: 800;
+        letter-spacing: 0.5px;
+        text-shadow: 0 1px 8px #00f7ff33;
+    }
+    .landing-project p {
+        font-size: 1.01rem;
+        color: #e6f1ff;
+        margin: 0;
+        opacity: 0.85;
+        font-weight: 500;
+    }
+    .landing-project:hover {
+        transform: translateY(-12px) scale(1.045);
+        box-shadow: 0 16px 40px #00f7ff44, 0 0 32px #6e44ff33;
+        border-color: #00f7ff;
+    }
+    .landing-project:hover img {
+        filter: grayscale(0) brightness(1.04) contrast(1.12) saturate(1.08);
+    }
+    @media (max-width: 900px) {
+        .landing-pages-grid {
+            flex-direction: column;
+            gap: 2rem;
+        }
+        .landing-project img {
+            height: 160px;
+        }
+        .landing-project {
+            min-width: 90vw;
+            max-width: 98vw;
+        }
+    }
+    </style>
+    <script>
+    // Gestion image cassée : ajoute la classe broken-img si l'image ne charge pas
+    document.addEventListener('DOMContentLoaded', function() {
+        document.querySelectorAll('.landing-project img').forEach(function(img) {
+            img.onerror = function() {
+                this.classList.add('broken-img');
+            };
+        });
+    });
+    </script>
+            </div>
+        </section>
+
+        <section id="contact" class="content-section">
+            <h2 class="hover-glow">Contact</h2>
+            <div class="contact-content">
+                <p class="contact-email">
+                    📧 <a href="mailto:david.freelance8551@gmail.com" class="email-link">david.freelance8551@gmail.com</a>
+                </p>
+                <p class="contact-cta">
+                    Ready to start your project? <span class="highlight">Let's talk!</span>
+                </p>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 David - All rights reserved</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

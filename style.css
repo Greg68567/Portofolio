@@ -1,0 +1,450 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background: linear-gradient(to right, #0f2027, #203a43, #2c5364);
+  color: #eee;
+  font-family: 'Segoe UI', sans-serif;
+  line-height: 1.6;
+}
+
+header {
+  text-align: center;
+  padding: 2rem 0;
+}
+
+nav {
+  text-align: center;
+  margin: 1rem 0;
+}
+
+.content-section {
+  display: none;
+  max-width: 1000px;
+  margin: 2rem auto;
+  padding: 0 1rem;
+}
+
+.content-section.active {
+  display: block;
+}
+
+.btn-modern {
+  display: inline-block;
+  margin: 0 0.5rem;
+  padding: 0.5rem 1.5rem;
+  background: transparent;
+  color: #00ffff;
+  border: 2px solid #00ffff;
+  border-radius: 2rem;
+  text-decoration: none;
+  font-weight: bold;
+  transition: all 0.3s ease;
+}
+
+.btn-modern:hover {
+  background: #00ffff;
+  color: #111;
+}
+
+.hover-glow:hover {
+  text-shadow: 0 0 10px #00ffff;
+}
+
+.projects-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.project img {
+  width: 100%;
+  height: auto;
+  border-radius: 0.5rem;
+  transition: transform 0.3s ease;
+}
+
+.project img:hover {
+  transform: scale(1.03);
+}
+
+.project-tabs {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin: 1rem 0;
+}
+
+.project-tab {
+  padding: 0.5rem 1.5rem;
+  background: transparent;
+  border: 2px solid #00ffff;
+  color: #00ffff;
+  border-radius: 2rem;
+  cursor: pointer;
+}
+
+.project-tab.active {
+  background: #00ffff;
+  color: #111;
+}
+
+.project-type {
+  display: none;
+}
+
+.project-type.active {
+  display: block;
+}
+
+footer {
+  text-align: center;
+  padding: 1rem;
+  margin-top: 2rem;
+}
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background: linear-gradient(to right, #0f2027, #203a43, #2c5364);
+  color: #eee;
+  font-family: 'Poppins', sans-serif;
+  line-height: 1.8;
+}
+
+h1, h2, h3 {
+  font-family: 'Playfair Display', serif;
+  font-weight: 700;
+}
+
+header {
+  text-align: center;
+  padding: 3rem 0;
+}
+
+header h1 {
+  font-size: 3rem;
+  letter-spacing: 1px;
+  margin-bottom: 0.5rem;
+}
+
+.freelancer {
+  color: #00ffff;
+  font-style: italic;
+}
+
+/* Effets de survol améliorés */
+.project {
+  position: relative;
+  overflow: hidden;
+  border-radius: 8px;
+  transition: all 0.4s ease;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.project img {
+  width: 100%;
+  height: 250px;
+  object-fit: cover;
+  transition: all 0.4s ease;
+}
+
+.project:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(0, 255, 255, 0.2);
+}
+
+.project:hover img {
+  transform: scale(1.05);
+  filter: brightness(1.1) saturate(1.1);
+}
+
+.project::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.7), transparent);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.project:hover::after {
+  opacity: 1;
+}
+
+/* Effets texte */
+.hover-glow {
+  transition: all 0.3s ease;
+}
+
+.hover-glow:hover {
+  color: #00ffff;
+  text-shadow: 0 0 10px rgba(0, 255, 255, 0.5);
+}
+
+.about-text {
+  font-size: 1.1rem;
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 1rem;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 8px;
+  transition: all 0.3s ease;
+}
+
+.about-text:hover {
+  background: rgba(255, 255, 255, 0.1);
+  transform: translateX(5px);
+}
+
+/* Boutons */
+.btn-modern {
+  /* ... styles existants ... */
+  transition: all 0.3s ease, box-shadow 0.3s ease;
+}
+
+.btn-modern:hover {
+  background: #00ffff;
+  color: #111;
+  box-shadow: 0 0 15px rgba(0, 255, 255, 0.5);
+  transform: translateY(-2px);
+}
+/* Ajoutez ces nouveaux styles à votre fichier existant */
+
+.project-link {
+  text-decoration: none;
+  color: inherit;
+}
+
+.project-overlay {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: rgba(0, 0, 0, 0.7);
+  color: white;
+  padding: 1rem;
+  transform: translateY(100%);
+  transition: transform 0.3s ease;
+}
+
+.project:hover .project-overlay {
+  transform: translateY(0);
+}
+
+.project-overlay h3 {
+  color: #00ffff;
+  margin-bottom: 0.5rem;
+  font-family: 'Playfair Display', serif;
+}
+
+.project-overlay p {
+  font-size: 0.9rem;
+  opacity: 0.8;
+}
+/* Styles existants conservés */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background: linear-gradient(to right, #0f2027, #203a43, #2c5364);
+  color: #eee;
+  font-family: 'Poppins', sans-serif;
+  line-height: 1.6;
+}
+
+/* Ajout des nouveaux styles pour les spécialités */
+.specialty-btn {
+  display: inline-block;
+  padding: 0.15em 0.7em;
+  margin: 0 0.2em;
+  background: transparent;
+  color: #00ffff;
+  border: 2px solid #00ffff;
+  border-radius: 2rem;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+}
+
+.specialty-btn::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 0%;
+  height: 100%;
+  background: #00ffff;
+  z-index: -1;
+  transition: width 0.3s ease;
+}
+
+.specialty-btn:hover {
+  color: #0f2027;
+}
+
+.specialty-btn:hover::before {
+  width: 100%;
+}
+/* About Section Enhancements */
+.about-content {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 0 1rem;
+}
+
+.specialties-list {
+    list-style-type: none;
+    margin: 1.5rem 0;
+    padding: 0;
+}
+
+.specialties-list li {
+    margin-bottom: 1rem;
+    padding-left: 1.5rem;
+    position: relative;
+}
+
+.specialty-btn {
+    display: inline-block;
+    padding: 0.3rem 1rem;
+    margin-right: 0.5rem;
+    background: transparent;
+    color: #00ffff;
+    border: 2px solid #00ffff;
+    border-radius: 2rem;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+}
+
+.specialty-btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 0%;
+    height: 100%;
+    background: #00ffff;
+    z-index: -1;
+    transition: width 0.3s ease;
+}
+
+.specialty-btn:hover {
+    color: #0f2027;
+}
+
+.specialty-btn:hover::before {
+    width: 100%;
+}
+
+.specialty-description {
+    display: inline;
+}
+
+.highlight {
+    color: #00ffff;
+    font-weight: 600;
+}
+
+.availability {
+    margin-top: 1.5rem;
+    font-style: italic;
+}
+
+/* Contact Section Enhancements */
+.contact-content {
+    text-align: center;
+}
+
+.contact-email {
+    font-size: 1.2rem;
+    margin-bottom: 1rem;
+}
+
+.email-link {
+    color: #00ffff;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.email-link:hover {
+    color: #fff;
+    text-decoration: underline;
+}
+
+.contact-cta {
+    font-size: 1.1rem;
+    margin-top: 1rem;
+}
+/* Ajoutez ou modifiez ces styles dans votre fichier style.css */
+.project {
+    position: relative;
+    border: 4px solid #000; /* Bordure noire plus épaisse */
+    border-radius: 8px;
+    overflow: hidden;
+    transition: all 0.4s ease;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    background-color: #000; /* Fond noir pour le cadre */
+}
+
+.project img {
+    width: 100%;
+    height: 250px;
+    object-fit: cover;
+    transition: all 0.4s ease;
+    display: block; /* Supprime l'espace sous l'image */
+    border: 2px solid #000; /* Optionnel: bordure supplémentaire pour l'image */
+}
+/* Style spécifique pour les liens de projet */
+.project-link {
+    display: block;
+    position: relative;
+    overflow: hidden;
+    border-radius: 8px;
+    height: 250px; /* Même hauteur que vos autres projets */
+}
+
+.project-link img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s;
+}
+
+.project-overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: rgba(0, 0, 0, 0.7);
+    padding: 1rem;
+    transform: translateY(100%);
+    transition: transform 0.3s ease;
+}
+
+.project-link:hover .project-overlay {
+    transform: translateY(0);
+}
+
+.project-link:hover img {
+    transform: scale(1.05);
+}
+

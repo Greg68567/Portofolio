@@ -1,0 +1,594 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shadow Link VPN | Invisible Browsing</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --shadow-dark: #0a0e17;
+            --shadow-purple: #6e44ff;
+            --shadow-cyan: #00f7ff;
+            --shadow-light: #e6f1ff;
+            --shadow-pink: #ff00c8;
+        }
+        /* Fade-in and scale-in effect for scroll-triggered appearance */
+        .fade-in {
+            opacity: 0;
+            transform: scale(0.92);
+            transition: opacity 0.8s cubic-bezier(.77,0,.18,1), transform 0.8s cubic-bezier(.77,0,.18,1);
+            will-change: opacity, transform;
+        }
+        .fade-in.visible {
+            opacity: 1;
+            transform: scale(1);
+        }
+        body {
+            background-color: var(--shadow-dark);
+            color: var(--shadow-light);
+            font-family: 'Segoe UI', sans-serif;
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+        }
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+        /* Home button (like nova-landing, top left, floating, modern) */
+        .home-btn {
+            position: fixed;
+            top: 2.2rem;
+            left: 2.2rem;
+            z-index: 50;
+            background: rgba(10,14,23,0.92);
+            border: 2px solid var(--shadow-cyan);
+            color: var(--shadow-cyan);
+            padding: 0.7rem 1.7rem;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+            box-shadow: 0 0 16px #00f7ff44;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 0.7em;
+            backdrop-filter: blur(6px);
+        }
+        .home-btn i {
+            font-size: 1.2em;
+        }
+        .home-btn:hover {
+            background: var(--shadow-cyan);
+            color: var(--shadow-dark);
+        }
+        @media (max-width: 600px) {
+            .home-btn {
+                top: 1rem;
+                left: 1rem;
+                padding: 0.5rem 1.1rem;
+                font-size: 1rem;
+            }
+        }
+        /* Animated background circles */
+        .bg-circles {
+            position: fixed;
+            top: 0; left: 0; width: 100vw; height: 100vh;
+            pointer-events: none; z-index: 0;
+        }
+        .bg-circle {
+            position: absolute;
+            border-radius: 50%;
+            opacity: 0.18;
+            filter: blur(30px);
+            animation: float 12s infinite alternate;
+        }
+        .bg-circle1 { width: 400px; height: 400px; background: #6e44ff; left: 5%; top: 10%; animation-delay: 0s;}
+        .bg-circle2 { width: 300px; height: 300px; background: #00f7ff; right: 10%; top: 30%; animation-delay: 2s;}
+        .bg-circle3 { width: 200px; height: 200px; background: #ff00c8; left: 40%; bottom: 10%; animation-delay: 4s;}
+        @keyframes float {
+            0% { transform: translateY(0) scale(1);}
+            100% { transform: translateY(-40px) scale(1.1);}
+        }
+        /* Header */
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 2rem 0;
+            position: relative;
+            width: 100%;
+            z-index: 10;
+        }
+        .logo {
+            font-size: 2rem;
+            font-weight: 900;
+            background: linear-gradient(90deg, var(--shadow-purple), var(--shadow-cyan));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            filter: drop-shadow(0 0 12px #00f7ff88);
+            letter-spacing: 2px;
+            animation: logo-glow 2s infinite alternate;
+        }
+        @keyframes logo-glow {
+            0% { filter: drop-shadow(0 0 8px #00f7ff88);}
+            100% { filter: drop-shadow(0 0 24px #6e44ff);}
+        }
+        .nav-links a {
+            margin-left: 2rem;
+            color: var(--shadow-light);
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s;
+            position: relative;
+        }
+        /* Lower the Download button in nav for alignment */
+        .nav-links .btn {
+            margin-top: 0.18em;
+            vertical-align: middle;
+        }
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--shadow-cyan);
+            transition: width 0.3s;
+        }
+        .nav-links a:hover::after { width: 100%; }
+        .btn {
+            display: inline-block;
+            background: transparent;
+            color: var(--shadow-cyan);
+            padding: 0.55rem 1.4rem;
+            border-radius: 4px;
+            text-decoration: none;
+            font-weight: 700;
+            border: 2px solid var(--shadow-cyan);
+            transition: all 0.4s;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 0 18px #00f7ff44;
+            letter-spacing: 1px;
+        }
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0;
+            width: 0; height: 100%;
+            background: var(--shadow-cyan);
+            z-index: -1;
+            transition: width 0.4s;
+        }
+        .btn:hover {
+            color: var(--shadow-dark);
+            box-shadow: 0 0 32px #00f7ff99;
+        }
+        .btn:hover::before { width: 100%; }
+        .btn-badge {
+            background: #ff00c8;
+            color: #fff;
+            font-size: 0.75rem;
+            font-weight: bold;
+            border-radius: 12px;
+            padding: 2px 10px;
+            margin-left: 10px;
+            vertical-align: middle;
+            box-shadow: 0 0 8px #ff00c8aa;
+            animation: badge-pop 1.2s infinite alternate;
+        }
+        @keyframes badge-pop {
+            0% { transform: scale(1);}
+            100% { transform: scale(1.15);}
+        }
+        .trust-badges {
+            display: flex;
+            gap: 1.5rem;
+            margin-top: 2rem;
+            font-size: 1.1rem;
+            opacity: 0.85;
+            flex-wrap: wrap;
+        }
+        .trust-badges p {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: rgba(110,68,255,0.08);
+            padding: 0.5rem 1.2rem;
+            border-radius: 20px;
+            box-shadow: 0 0 8px #6e44ff22;
+        }
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            padding: 0 0;
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+        }
+        .hero-content {
+            max-width: 600px;
+            z-index: 2;
+            animation: fadeInUp 1.2s cubic-bezier(.77,0,.18,1) 0.2s both;
+        }
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(40px);}
+            to { opacity: 1; transform: translateY(0);}
+        }
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1.5rem;
+            line-height: 1.2;
+            background: linear-gradient(90deg, var(--shadow-light), var(--shadow-cyan));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            text-shadow: 0 0 18px #00f7ff44;
+            animation: fadeInUp 1.2s 0.4s both;
+        }
+        .hero p {
+            font-size: 1.1rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+            animation: fadeInUp 1.2s 0.6s both;
+        }
+        /* Server Map */
+        .server-map {
+            position: absolute;
+            right: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 40%;
+            max-width: 600px;
+            z-index: 1;
+        }
+        .server {
+            position: absolute;
+            width: 14px;
+            height: 14px;
+            background: var(--shadow-cyan);
+            border-radius: 50%;
+            filter: drop-shadow(0 0 12px var(--shadow-cyan));
+            animation: pulse 2s infinite;
+            cursor: pointer;
+            transition: transform 0.2s, background 0.2s;
+        }
+        .server:hover {
+            background: #ff00c8;
+            transform: scale(1.3);
+            box-shadow: 0 0 24px #ff00c8;
+        }
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(1.3); opacity: 0.7; }
+        }
+        /* Features */
+        .features {
+            padding: 6rem 0;
+            text-align: center;
+            z-index: 2;
+            position: relative;
+        }
+        .section-title {
+            margin-bottom: 4rem;
+        }
+        .section-title h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: var(--shadow-light);
+            letter-spacing: 1px;
+            text-shadow: 0 0 12px #6e44ff44;
+        }
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .feature-card {
+            background: rgba(10, 14, 23, 0.7);
+            padding: 2rem;
+            border-radius: 12px;
+            border: 1.5px solid rgba(110, 68, 255, 0.2);
+            transition: all 0.4s;
+            backdrop-filter: blur(5px);
+            box-shadow: 0 0 0 transparent;
+            position: relative;
+        }
+        .feature-card:hover {
+            transform: translateY(-12px) scale(1.04);
+            border-color: var(--shadow-cyan);
+            box-shadow: 0 10px 30px #00f7ff33, 0 0 24px #6e44ff33;
+        }
+        .feature-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+            color: var(--shadow-purple);
+            filter: drop-shadow(0 0 8px #6e44ff88);
+        }
+        /* Pricing */
+        .pricing {
+            padding: 6rem 0;
+            background: rgba(0, 0, 0, 0.2);
+            z-index: 2;
+            position: relative;
+        }
+        .pricing-cards {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            flex-wrap: wrap;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .pricing-card {
+            background: var(--shadow-dark);
+            padding: 2.5rem;
+            border-radius: 12px;
+            width: 300px;
+            border: 1.5px solid var(--shadow-purple);
+            transition: all 0.4s;
+            box-shadow: 0 0 0 transparent;
+            position: relative;
+        }
+        .pricing-card.popular {
+            border-color: var(--shadow-cyan);
+            transform: translateY(-20px) scale(1.04);
+            box-shadow: 0 20px 40px #00f7ff22, 0 0 24px #6e44ff22;
+        }
+        .pricing-card:hover {
+            border-color: #ff00c8;
+            box-shadow: 0 0 32px #ff00c8aa;
+            transform: scale(1.05);
+        }
+        .popular-badge {
+            background: var(--shadow-cyan);
+            color: var(--shadow-dark);
+            padding: 0.3rem 1rem;
+            border-radius: 20px;
+            font-weight: 700;
+            font-size: 0.8rem;
+            display: inline-block;
+            margin-bottom: 1rem;
+            box-shadow: 0 0 8px #00f7ff88;
+        }
+        /* Footer */
+        footer {
+            padding: 4rem 0;
+            text-align: center;
+            background: rgba(0, 0, 0, 0.4);
+            z-index: 2;
+            position: relative;
+        }
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+        .social-links a {
+            color: var(--shadow-light);
+            font-size: 1.5rem;
+            transition: all 0.3s;
+        }
+        .social-links a:hover {
+            color: var(--shadow-cyan);
+            transform: translateY(-5px) scale(1.2);
+            text-shadow: 0 0 12px #00f7ff;
+        }
+        /* Responsive */
+        @media (max-width: 992px) {
+            .server-map { display: none; }
+            .hero-content { max-width: 100%; }
+        }
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 2.2rem; }
+            .nav-links { display: none; }
+            .pricing-cards { flex-direction: column; align-items: center; }
+            .pricing-card.popular { transform: none; }
+        }
+    </style>
+</head>
+<body>
+    <!-- Animated background circles -->
+    <div class="bg-circles">
+        <div class="bg-circle bg-circle1"></div>
+        <div class="bg-circle bg-circle2"></div>
+        <div class="bg-circle bg-circle3"></div>
+    </div>
+    <!-- Home button (like nova-landing, top left, floating) -->
+    <a href="index.html#landing-pages" class="home-btn">
+        <i class="fas fa-home"></i> Home
+    </a>
+    <main class="container">
+        <!-- Navigation -->
+        <header>
+            <div class="logo">ShadowLink</div>
+            <nav class="nav-links">
+                <a href="#features">Features</a>
+                <a href="#pricing">Pricing</a>
+                <a href="#contact">Contact</a>
+                <a href="#" class="btn">Download</a>
+            </nav>
+        </header>
+        <!-- Hero Section -->
+        <section class="hero fade-in">
+            <div class="hero-content">
+                <h1>Invisible Browsing, Total Freedom</h1>
+                <p>Shadow Link VPN encrypts your connection and hides your digital fingerprint for 100% anonymous browsing. Access all content without restrictions.</p>
+                <a href="#pricing" class="btn">
+                    30 Days Free Trial
+                    <span class="btn-badge">New</span>
+                </a>
+                <div class="trust-badges">
+                    <p><i class="fas fa-shield-alt"></i> 256-bit Encryption</p>
+                    <p><i class="fas fa-globe"></i> 750+ servers worldwide</p>
+                    <p><i class="fas fa-user-secret"></i> Zero logs</p>
+                </div>
+            </div>
+            <!-- Interactive Server Map -->
+            <div class="server-map">
+                <!-- Inline SVG world map, minimalist, styled for background -->
+                <svg viewBox="0 0 1200 600" width="100%" height="auto" style="opacity:0.22; display:block;" xmlns="http://www.w3.org/2000/svg" aria-label="World Map">
+                  <g fill="none" stroke="#6e44ff" stroke-width="8" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M100,300 Q200,100 400,200 Q600,300 800,200 Q1000,100 1100,300 Q1000,500 800,400 Q600,300 400,400 Q200,500 100,300 Z"/>
+                    <ellipse cx="600" cy="300" rx="500" ry="200" stroke="#00f7ff" stroke-width="6"/>
+                    <ellipse cx="600" cy="300" rx="350" ry="120" stroke="#ff00c8" stroke-width="4"/>
+                  </g>
+                  <g fill="#6e44ff" opacity="0.5">
+                    <circle cx="200" cy="300" r="12"/>
+                    <circle cx="1000" cy="300" r="12"/>
+                    <circle cx="600" cy="180" r="12"/>
+                    <circle cx="600" cy="420" r="12"/>
+                    <circle cx="400" cy="200" r="8"/>
+                    <circle cx="800" cy="200" r="8"/>
+                  </g>
+                </svg>
+                <div class="server" style="top:30%; left:20%;"></div>
+                <div class="server" style="top:45%; left:50%;"></div>
+                <div class="server" style="top:60%; left:80%;"></div>
+                <div class="server" style="top:20%; left:70%;"></div>
+                <div class="server" style="top:70%; left:30%;"></div>
+            </div>
+        </section>
+        <!-- Features -->
+        <section class="features fade-in" id="features">
+            <div class="section-title">
+                <h2>Shadow Technology</h2>
+                <p>Our private network makes you invisible</p>
+            </div>
+            <div class="features-grid">
+                <div class="feature-card fade-in">
+                    <div class="feature-icon">
+                        <i class="fas fa-user-secret"></i>
+                    </div>
+                    <h3>Zero Logs</h3>
+                    <p>No trace of your activity is recorded, not even by us.</p>
+                </div>
+                <div class="feature-card fade-in">
+                    <div class="feature-icon">
+                        <i class="fas fa-bolt"></i>
+                    </div>
+                    <h3>Ultra Fast</h3>
+                    <p>Optimized network with less than 5% speed loss thanks to our exclusive technology.</p>
+                </div>
+                <div class="feature-card fade-in">
+                    <div class="feature-icon">
+                        <i class="fas fa-unlock-alt"></i>
+                    </div>
+                    <h3>Global Unblocking</h3>
+                    <p>Access all geo-blocked content, from streaming platforms to censored sites.</p>
+                </div>
+                <div class="feature-card fade-in">
+                    <div class="feature-icon">
+                        <i class="fas fa-image"></i>
+                    </div>
+                    <h3>Beautiful Interface</h3>
+                    <p>Enjoy a modern, intuitive, and visually appealing dashboard for effortless VPN control.</p>
+                </div>
+            </div>
+        </section>
+        <!-- Pricing -->
+        <section class="pricing fade-in" id="pricing">
+            <div class="section-title">
+                <h2>Choose Your Shadow</h2>
+                <p>30 days money-back guarantee</p>
+            </div>
+            <div class="pricing-cards">
+                <div class="pricing-card">
+                    <h3>Basic</h3>
+                    <p class="price">$4.99<span>/month</span></p>
+                    <ul>
+                        <li><i class="fas fa-check"></i> 5 devices</li>
+                        <li><i class="fas fa-check"></i> 50 countries</li>
+                        <li><i class="fas fa-check"></i> Standard support</li>
+                    </ul>
+                    <a href="#" class="btn">Subscribe</a>
+                </div>
+                <div class="pricing-card popular">
+                    <div class="popular-badge">POPULAR</div>
+                    <h3>Shadow Pro</h3>
+                    <p class="price">$7.99<span>/month</span></p>
+                    <ul>
+                        <li><i class="fas fa-check"></i> 10 devices</li>
+                        <li><i class="fas fa-check"></i> All countries (750+ servers)</li>
+                        <li><i class="fas fa-check"></i> Network priority</li>
+                        <li><i class="fas fa-check"></i> 24/7 support</li>
+                    </ul>
+                    <a href="#" class="btn">Subscribe</a>
+                </div>
+                <div class="pricing-card">
+                    <h3>Business</h3>
+                    <p class="price">$12.99<span>/month</span></p>
+                    <ul>
+                        <li><i class="fas fa-check"></i> Unlimited devices</li>
+                        <li><i class="fas fa-check"></i> Dedicated servers</li>
+                        <li><i class="fas fa-check"></i> Personal manager</li>
+                    </ul>
+                    <a href="#" class="btn">Contact</a>
+                </div>
+            </div>
+        </section>
+        <!-- Footer -->
+        <footer id="contact">
+            <div class="logo" style="margin-bottom:1.5rem;">ShadowLink</div>
+            <div class="social-links">
+                <a href="#"><i class="fab fa-twitter"></i></a>
+                <a href="#"><i class="fab fa-discord"></i></a>
+                <a href="#"><i class="fab fa-github"></i></a>
+                <a href="#"><i class="fab fa-reddit"></i></a>
+            </div>
+            <p>© 2025 Shadow Link VPN. All rights reserved.</p>
+        </footer>
+    </main>
+    <script>
+        // Server connection animation
+        document.addEventListener('DOMContentLoaded', () => {
+            const servers = document.querySelectorAll('.server');
+            servers.forEach(server => {
+                server.style.animationDelay = `${Math.random() * 2}s`;
+                server.addEventListener('click', () => {
+                    server.style.animation = 'none';
+                    server.style.transform = 'scale(1.5)';
+                    server.style.backgroundColor = '#ff00c8';
+                    setTimeout(() => {
+                        server.style.animation = 'pulse 2s infinite';
+                        server.style.backgroundColor = 'var(--shadow-cyan)';
+                    }, 1000);
+                });
+            });
+            // Fade-in effect for sections and cards (like nova-landing)
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                    }
+                });
+            }, { threshold: 0.15 });
+            document.querySelectorAll('.fade-in').forEach(el => {
+                observer.observe(el);
+            });
+            // Animate cards as before (all feature/pricing cards get fade-in)
+            const cardObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                    }
+                });
+            }, { threshold: 0.15 });
+            document.querySelectorAll('.feature-card, .pricing-card').forEach(el => {
+                cardObserver.observe(el);
+            });
+        });
+    </script>
+</body>
+</html>
